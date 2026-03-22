@@ -13,6 +13,15 @@
     />
 
     <style>
+      :root {
+        --paper: #fbfaf7;
+        --form-paper: #f7f4ee;
+        --ink: #1c1c1b;
+        --accent: #c8102e;
+        --surround-top: #ece9e2;
+        --surround-bottom: #e4dfd7;
+      }
+
       * {
         box-sizing: border-box;
         margin: 0;
@@ -20,7 +29,17 @@
       }
 
       body {
-        background-color: #1a1a1a;
+        background:
+          radial-gradient(
+            circle at top,
+            rgba(255, 255, 255, 0.42) 0%,
+            rgba(255, 255, 255, 0) 36%
+          ),
+          linear-gradient(
+            180deg,
+            var(--surround-top) 0%,
+            var(--surround-bottom) 100%
+          );
         display: grid;
         place-items: center;
         min-height: 100vh;
@@ -32,13 +51,15 @@
       .poster {
         width: 794px;
         height: 1123px;
-        background-color: #f4f1ea;
+        background-color: var(--paper);
         position: relative;
-        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+        box-shadow:
+          0 28px 80px rgba(82, 67, 52, 0.18),
+          0 0 0 1px rgba(28, 28, 27, 0.06);
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        color: #1c1c1b;
+        color: var(--ink);
       }
 
       .page-meta {
@@ -61,20 +82,22 @@
         margin-right: 48px;
         margin-bottom: 48px;
         flex-grow: 1;
+        background-color: var(--form-paper);
 
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         grid-template-rows: auto auto auto 1fr auto auto;
 
-        border-top: 1.5px solid #1c1c1b;
-        border-left: 1.5px solid #1c1c1b;
+        border-top: 1.5px solid var(--ink);
+        border-left: 1.5px solid var(--ink);
         position: relative;
         z-index: 10;
       }
 
       .cell {
-        border-right: 1.5px solid #1c1c1b;
-        border-bottom: 1.5px solid #1c1c1b;
+        background-color: var(--form-paper);
+        border-right: 1.5px solid var(--ink);
+        border-bottom: 1.5px solid var(--ink);
         padding: 18px 24px;
         font-family: "Space Mono", monospace;
         display: flex;
@@ -107,8 +130,8 @@
       }
 
       .header-cell {
-        background-color: #1c1c1b;
-        color: #f4f1ea;
+        background-color: var(--ink);
+        color: var(--paper);
         padding: 14px 24px;
       }
 
@@ -166,7 +189,7 @@
         left: 14px;
         width: 265px;
         height: 6px;
-        background-color: #c8102e;
+        background-color: var(--accent);
         transform: rotate(-3deg);
         z-index: 20;
         border-radius: 1px;
@@ -179,7 +202,7 @@
         font-family: "Caveat", cursive;
         font-weight: 700;
         font-size: 130px;
-        color: #c8102e;
+        color: var(--accent);
         white-space: nowrap;
         z-index: 30;
         transform: rotate(-2deg);
@@ -196,10 +219,9 @@
       }
 
       .editorial-cell {
-        background-color: #1c1c1b;
-        color: #f4f1ea;
+        background-color: var(--ink);
+        color: var(--paper);
         padding: 34px 32px 34px;
-        border-top: 1.5px solid #f4f1ea;
         display: block;
       }
 
@@ -219,7 +241,7 @@
       .editorial-rule {
         width: 60px;
         height: 3.5px;
-        background-color: #c8102e;
+        background-color: var(--accent);
         margin-bottom: 26px;
       }
 
@@ -230,12 +252,12 @@
         letter-spacing: -0.04em;
         line-height: 1.1;
         margin-bottom: 20px;
-        color: #f4f1ea;
+        color: var(--paper);
         max-width: 470px;
       }
 
       .editorial-headline .accent {
-        color: #c8102e;
+        color: var(--accent);
         font-weight: 500;
       }
 
@@ -294,7 +316,7 @@
         font-family: "Inter", sans-serif;
         font-size: 11px;
         line-height: 1.35;
-        color: #f4f1ea;
+        color: var(--paper);
       }
     </style>
   </head>
