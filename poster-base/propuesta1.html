@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>La Resposta Automàtica - Cartell Concurs</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #1a1a1a;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 60px 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .poster {
+        width: 794px;
+        height: 1123px;
+        background-color: #f4f1ea;
+        position: relative;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        color: #1c1c1b;
+      }
+
+      .page-meta {
+        position: absolute;
+        top: 38px;
+        left: 48px;
+        right: 48px;
+        display: flex;
+        justify-content: space-between;
+        font-family: "Space Mono", monospace;
+        font-size: 8.5px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        opacity: 0.3;
+      }
+
+      .system-grid {
+        margin-top: 74px;
+        margin-left: 48px;
+        margin-right: 48px;
+        margin-bottom: 48px;
+        flex-grow: 1;
+
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: auto auto auto 1fr auto auto;
+
+        border-top: 1.5px solid #1c1c1b;
+        border-left: 1.5px solid #1c1c1b;
+        position: relative;
+        z-index: 10;
+      }
+
+      .cell {
+        border-right: 1.5px solid #1c1c1b;
+        border-bottom: 1.5px solid #1c1c1b;
+        padding: 18px 24px;
+        font-family: "Space Mono", monospace;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      .col-12 {
+        grid-column: span 12;
+      }
+      .col-7 {
+        grid-column: span 7;
+      }
+      .col-5 {
+        grid-column: span 5;
+      }
+
+      .cell-label {
+        font-size: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        opacity: 0.4;
+        margin-bottom: 8px;
+      }
+
+      .cell-value {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+      }
+
+      .header-cell {
+        background-color: #1c1c1b;
+        color: #f4f1ea;
+        padding: 14px 24px;
+      }
+
+      .header-cell .cell-value {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .schedule-list {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin-top: 4px;
+        font-size: 10px;
+        opacity: 0.8;
+      }
+
+      .schedule-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        border-bottom: 1px dotted rgba(28, 28, 27, 0.18);
+        padding-bottom: 3px;
+      }
+
+      .checkbox-row {
+        font-size: 10px;
+        margin-top: 5px;
+        opacity: 0.8;
+        line-height: 1.5;
+      }
+
+      .immediata-cell .cell-value {
+        font-size: 13px;
+        letter-spacing: 0.06em;
+      }
+
+      .status-cell {
+        padding: 40px 24px;
+        position: relative;
+      }
+
+      .status-value {
+        font-size: 140px;
+        font-weight: 700;
+        letter-spacing: -0.05em;
+        line-height: 0.85;
+        margin-top: 12px;
+      }
+
+      .human-slash {
+        position: absolute;
+        top: 112px;
+        left: 14px;
+        width: 265px;
+        height: 6px;
+        background-color: #c8102e;
+        transform: rotate(-3deg);
+        z-index: 20;
+        border-radius: 1px;
+      }
+
+      .human-correction {
+        position: absolute;
+        top: 135px;
+        left: 22px;
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        font-size: 130px;
+        color: #c8102e;
+        white-space: nowrap;
+        z-index: 30;
+        transform: rotate(-2deg);
+        line-height: 1;
+        pointer-events: none;
+      }
+
+      .eval-text {
+        font-size: 9.5px;
+        line-height: 1.55;
+        opacity: 0.5;
+        font-weight: 400;
+        text-align: justify;
+      }
+
+      .editorial-cell {
+        background-color: #1c1c1b;
+        color: #f4f1ea;
+        padding: 34px 32px 34px;
+        border-top: 1.5px solid #f4f1ea;
+        display: block;
+      }
+
+      .editorial-layout {
+        height: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 132px;
+        align-items: end;
+        gap: 18px;
+      }
+
+      .editorial-copy {
+        align-self: end;
+        min-width: 0;
+      }
+
+      .editorial-rule {
+        width: 60px;
+        height: 3.5px;
+        background-color: #c8102e;
+        margin-bottom: 26px;
+      }
+
+      .editorial-headline {
+        font-family: "Inter", sans-serif;
+        font-size: 52px;
+        font-weight: 400;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        color: #f4f1ea;
+        max-width: 470px;
+      }
+
+      .editorial-headline .accent {
+        color: #c8102e;
+        font-weight: 500;
+      }
+
+      .editorial-subline {
+        font-family: "Space Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(244, 241, 234, 0.6);
+        line-height: 1.5;
+        max-width: 360px;
+      }
+
+      .editorial-qr-module {
+        width: 132px;
+        justify-self: end;
+        align-self: end;
+        display: grid;
+        gap: 8px;
+      }
+
+      .editorial-qr-link {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .editorial-qr-shell {
+        width: 132px;
+        height: 132px;
+        padding: 8px;
+        display: grid;
+        place-items: center;
+        border: 1.5px solid rgba(244, 241, 234, 0.28);
+        background: linear-gradient(
+          180deg,
+          rgba(244, 241, 234, 0.03) 0%,
+          rgba(244, 241, 234, 0) 100%
+        );
+      }
+
+      .editorial-qr-image {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .editorial-qr-kicker {
+        font-family: "Space Mono", monospace;
+        font-size: 7px;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: rgba(244, 241, 234, 0.48);
+      }
+
+      .editorial-qr-caption {
+        font-family: "Inter", sans-serif;
+        font-size: 11px;
+        line-height: 1.35;
+        color: #f4f1ea;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="poster">
+      <div class="page-meta">
+        <span>REGISTRE SETMANAL // VOL. 42</span>
+        <span>DATA: ACTUALITZACIÓ CONTÍNUA</span>
+      </div>
+
+      <div class="system-grid">
+        <div class="cell col-12 header-cell">
+          <span class="cell-value"
+            >Registre d'Activitat Diària i Expectatives</span
+          >
+        </div>
+
+        <div class="cell col-7">
+          <span class="cell-label">Agenda diària</span>
+          <div class="schedule-list">
+            <div class="schedule-item">
+              <span>07:30 – 08:30</span><span>Missatges i desplaçament</span>
+            </div>
+            <div class="schedule-item">
+              <span>08:30 – 15:00</span
+              ><span>Classes, tasques i seguiment</span>
+            </div>
+            <div class="schedule-item">
+              <span>16:00 – 19:30</span><span>Activitats, esport o reforç</span>
+            </div>
+            <div class="schedule-item">
+              <span>20:00 – 23:30</span
+              ><span>Estudi i preparació de l'endemà</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cell col-5">
+          <span class="cell-label">Expectatives de resposta</span>
+          <div class="checkbox-row" style="margin-top: 4px">[X] Disponible</div>
+          <div class="checkbox-row">[X] Connectat/da</div>
+          <div class="checkbox-row">[X] Present</div>
+          <div class="checkbox-row" style="opacity: 0.25">[ ] Descansat/da</div>
+        </div>
+
+        <div class="cell col-12 immediata-cell">
+          <span class="cell-label">Resposta digital esperada</span>
+          <span class="cell-value">IMMEDIATA</span>
+        </div>
+
+        <div class="cell col-12 status-cell">
+          <span class="cell-label"
+            >Estat general (resposta automàtica freqüent)</span
+          >
+          <div class="status-value">BÉ.</div>
+          <div class="human-slash"></div>
+          <div class="human-correction">No exactament.</div>
+        </div>
+
+        <div class="cell col-12">
+          <span class="cell-label">Avaluació del cicle</span>
+          <div class="eval-text">
+            Cap incidència visible. Es compleixen terminis i assistència
+            prevista. Es recomana mantenir el ritme actual sense pauses
+            estructurals.
+          </div>
+        </div>
+
+        <div class="cell col-12 editorial-cell">
+          <div class="editorial-layout">
+            <div class="editorial-copy">
+              <div class="editorial-rule"></div>
+              <h1 class="editorial-headline">
+                Dir <span class="accent">«bé»</span> no sempre<br />
+                vol dir estar <span class="accent">bé</span>.
+              </h1>
+              <p class="editorial-subline">
+                Xerrem de veres. Normalitzem la salut mental.
+              </p>
+            </div>
+
+            <div class="editorial-qr-module">
+              <span class="editorial-qr-kicker">Surt del pilot automàtic</span>
+              <a
+                class="editorial-qr-link"
+                href="https://jobregv.github.io/salut-mental/"
+                aria-label="Obre l'enllaç de suport"
+              >
+                <div class="editorial-qr-shell">
+                  <img
+                    class="editorial-qr-image"
+                    src="./qr-xerrem-de-veres.svg"
+                    alt="Codi QR per continuar la conversa"
+                  />
+                </div>
+              </a>
+              <p class="editorial-qr-caption"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
