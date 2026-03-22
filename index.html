@@ -174,6 +174,7 @@
 
       .status-word {
         position: relative;
+        display: inline-block;
         margin: 6px 0 0;
         font-size: clamp(4.4rem, 24vw, 8.8rem);
         line-height: 0.82;
@@ -181,12 +182,13 @@
         letter-spacing: -0.08em;
       }
 
-      .status-slash {
+      .status-word::after {
+        content: "";
         position: absolute;
-        left: var(--gutter);
-        top: clamp(88px, 24vw, 118px);
-        width: clamp(180px, 68vw, 420px);
-        height: clamp(4px, 1.2vw, 6px);
+        left: -0.1em;
+        top: 0.5em;
+        width: 2.75em;
+        height: clamp(4px, 0.05em, 6px);
         background: var(--accent);
         transform: rotate(-3deg);
         transform-origin: left center;
@@ -573,7 +575,6 @@
         <div class="hero-status" aria-hidden="true">
           <span class="label">Estat general</span>
           <div class="status-word">BÉ.</div>
-          <div class="status-slash"></div>
           <div class="status-truth">No exactament.</div>
         </div>
 
@@ -598,7 +599,7 @@
             </p>
             <p>
               Horaris plens. Notes bones. Missatges contestats. Extraescolars.
-              Tot al seu lloc. I, mentrestant,
+              Tot al seu lloc. Tot i així,
               <span class="signal">ansietat a la gola</span>, el cap accelerat i
               la sensació que si afluixes una mica, tot se'n va a norris.
             </p>
@@ -793,52 +794,52 @@
     <script>
       const fitStatusTruth = (element) => {
         const rootSize = parseFloat(
-          getComputedStyle(document.documentElement).fontSize
-        );
-        const minSize = rootSize * 2.6;
-        const maxSize = rootSize * 8;
-        let low = minSize;
-        let high = maxSize;
+          getComputedStyle(document.documentElement).fontSize,
+        )
+        const minSize = rootSize * 2.6
+        const maxSize = rootSize * 8
+        let low = minSize
+        let high = maxSize
 
         while (high - low > 0.25) {
-          const mid = (low + high) / 2;
-          element.style.fontSize = `${mid}px`;
+          const mid = (low + high) / 2
+          element.style.fontSize = `${mid}px`
 
           if (element.scrollWidth <= element.clientWidth + 1) {
-            low = mid;
+            low = mid
           } else {
-            high = mid;
+            high = mid
           }
         }
 
-        element.style.fontSize = `${low}px`;
-      };
+        element.style.fontSize = `${low}px`
+      }
 
       const setupStatusTruth = () => {
-        const statusTruth = document.querySelector(".status-truth");
+        const statusTruth = document.querySelector(".status-truth")
 
         if (!statusTruth || !statusTruth.parentElement) {
-          return;
+          return
         }
 
-        const fit = () => fitStatusTruth(statusTruth);
-        const observer = new ResizeObserver(fit);
+        const fit = () => fitStatusTruth(statusTruth)
+        const observer = new ResizeObserver(fit)
 
-        fit();
-        observer.observe(statusTruth.parentElement);
-        window.addEventListener("orientationchange", fit);
+        fit()
+        observer.observe(statusTruth.parentElement)
+        window.addEventListener("orientationchange", fit)
 
         if (document.fonts?.ready) {
-          document.fonts.ready.then(fit);
+          document.fonts.ready.then(fit)
         }
-      };
+      }
 
       if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", setupStatusTruth, {
           once: true,
-        });
+        })
       } else {
-        setupStatusTruth();
+        setupStatusTruth()
       }
     </script>
   </body>
