@@ -112,7 +112,7 @@
       }
 
       .hero {
-        overflow: hidden;
+        overflow: visible;
       }
 
       .hero-top {
@@ -202,7 +202,7 @@
       .status-truth {
         position: absolute;
         left: var(--gutter);
-        right: var(--gutter);
+        right: 0;
         top: clamp(106px, 30vw, 150px);
         display: block;
         color: var(--accent);
@@ -429,6 +429,12 @@
         gap: 12px;
       }
 
+      .resource-links.two-up {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
       .chip {
         display: flex;
         align-items: center;
@@ -450,6 +456,14 @@
           border-color 180ms ease,
           background-color 180ms ease,
           transform 180ms ease;
+      }
+
+      .resource-links.two-up .chip {
+        min-height: 48px;
+        padding: 12px 10px;
+        font-size: clamp(0.68rem, 2.5vw, 0.78rem);
+        line-height: 1.35;
+        letter-spacing: 0.08em;
       }
 
       .chip:hover,
@@ -679,8 +693,8 @@
               En cas de <strong>risc immediat</strong>, si et pots fer mal o si
               qualcú està en perill ara mateix, no ho rumïis més.
             </p>
-            <div class="resource-links">
-              <a class="chip" href="tel:112">Trucar 112</a>
+            <div class="resource-links two-up">
+              <a class="chip" href="tel:112">Cridar 112</a>
               <a
                 class="chip"
                 href="https://www.caib.es/sites/112/"
@@ -699,8 +713,8 @@
               <strong>Gratuïta, confidencial i oberta 24/7.</strong>
               També hi poden telefonar familiars o gent propera.
             </p>
-            <div class="resource-links">
-              <a class="chip" href="tel:024">Trucar 024</a>
+            <div class="resource-links two-up">
+              <a class="chip" href="tel:024">Cridar 024</a>
               <a
                 class="chip"
                 href="https://www.sanidad.gob.es/linea024/home.htm"
@@ -719,8 +733,8 @@
               mèdica a les Illes Balears. Quan la situació t'ha superat i no
               saps per on començar, aquesta és una bona opció.
             </p>
-            <div class="resource-links">
-              <a class="chip" href="tel:061">Trucar 061</a>
+            <div class="resource-links two-up">
+              <a class="chip" href="tel:061">Cridar 061</a>
               <a
                 class="chip"
                 href="https://www.ibsalut.es/"
@@ -739,7 +753,7 @@
               atenció primària i dir, sense adorns:
               <strong>“tenc ansietat i necessit ajuda”</strong>.
             </p>
-            <div class="resource-links">
+            <div class="resource-links two-up">
               <a class="chip" href="tel:971220000">971 220 000</a>
               <a
                 class="chip"
@@ -761,7 +775,7 @@
                 href="https://www.3salutmental.com/"
                 target="_blank"
                 rel="noreferrer"
-                >3 Salut Mental</a
+                >Web 3 Salut Mental</a
               >
             </div>
           </article>
@@ -774,15 +788,15 @@
               explicar-ho a ningú del teu entorn, tens aquesta línia d'ajuda.
               Accessible també des de les Illes Balears.
             </p>
-            <div class="resource-links">
+            <div class="resource-links two-up">
               <a class="chip" href="tel:717003717">717 003 717</a>
               <a
                 class="chip"
                 href="https://telefonodelaesperanza.org/islas-baleares"
                 target="_blank"
                 rel="noreferrer"
-                >Veure recurs</a
-              >
+                >Web Telèfon de l'Esperança
+              </a>
             </div>
           </article>
         </div>
@@ -804,6 +818,7 @@
         )
         const minSize = rootSize * 2.6
         const maxSize = rootSize * 8
+        const overflowAllowance = 8
         let low = minSize
         let high = maxSize
 
@@ -811,7 +826,7 @@
           const mid = (low + high) / 2
           element.style.fontSize = `${mid}px`
 
-          if (element.scrollWidth <= element.clientWidth + 1) {
+          if (element.scrollWidth <= element.clientWidth + overflowAllowance) {
             low = mid
           } else {
             high = mid
