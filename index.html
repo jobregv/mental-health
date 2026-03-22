@@ -168,14 +168,18 @@
       }
 
       .hero-status .label {
+        display: block;
+        width: fit-content;
+        margin-bottom: 10px;
         position: relative;
         z-index: 3;
       }
 
       .status-word {
         position: relative;
-        display: inline-block;
-        margin: 6px 0 0;
+        display: block;
+        width: fit-content;
+        margin: 0;
         font-size: clamp(4.4rem, 24vw, 8.8rem);
         line-height: 0.82;
         font-weight: 800;
@@ -185,9 +189,9 @@
       .status-word::after {
         content: "";
         position: absolute;
-        left: -0.1em;
-        top: 0.5em;
-        width: 2.75em;
+        left: -0.04em;
+        top: 0.48em;
+        width: calc(100% + 0.08em);
         height: clamp(4px, 0.05em, 6px);
         background: var(--accent);
         transform: rotate(-3deg);
